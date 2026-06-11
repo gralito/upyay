@@ -1,4 +1,4 @@
-# upyay v1.0.0
+# upyay v3.0.0
 
 System updater for Arch-based systems using yay.
 

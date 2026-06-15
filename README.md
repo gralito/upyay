@@ -140,12 +140,16 @@ Detailed information about updates is stored in `~/.logs/upyay/upyay.log`
 - Consider the security implications of automatic updates and passwordless sudo
 - This is primarily designed for personal desktop systems with a single user
 
-## Upcoming
+## Changelog
 
-A new version will be prepared soon with a new feature :
-- Any suggestion brought by you.
-- Detailed summary of all updated packages
-- Performs log rotation on pacman logs
+**v3.0.0**
+- short and long arguments version
+
+**v3.1.0**
+- you can display a summary of the updated packages
+- a new option is added to auto-display this summary
+
+
 
 ---
 

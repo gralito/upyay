@@ -69,12 +69,11 @@ show_help () {
         -v / --version        : display package version
 
     EXAMPLES:
-        upyay                 : menu mode execution
         upyay -h              : show help
 
     EXIT CODES:
         0 - Success
-        1 - Error
+        1 - Argument Error
 
 EOF
 }
@@ -233,68 +232,6 @@ parse_args (){
     fi
 }
 
-#=== Menu mode ===#
-menu_mode () {
-    echo
-    echo "============================================"
-    echo "		     upyay ${VERSION}"
-    echo "============================================"
-    echo
-
-    while true ;
-    do
-        echo "Options :"
-        echo "[1]	Update your system"
-        echo "[2]	Refresh mirror's lists"
-        echo "[3]	Clean journal"
-        echo "[4]	Clean cache"
-        echo "[5]	Remove orphans"
-        echo "[6]   Last actions"
-        echo "[7]	Exit program"
-        echo
-        read -p "Select an option [1] > " select_option
-        select_option=${select_option:-1}
-
-        case $select_option in
-            1)
-                # Update system
-                system_update
-                see_log
-                continue;;
-            2)	
-                # Refresh mirror's lists
-                update_mirrors
-                see_log
-                continue;;
-            3)
-                # Clean journal
-                clean_journal
-                see_log
-                continue;;
-            4)
-                # Clean cache
-                clean_cache
-                see_log
-                continue;;
-            5)
-                # Remove orphans
-                remove_orphans
-                see_log
-                continue;;
-            6)
-                # Last actions
-                last_actions
-                continue;;
-            7)
-                # Quit programme
-                check_backup
-                write_last
-                exit 0;;
-        esac
-    done    
-    exit 0
-}
-
 #=== System update ===#
 system_update () {
 	log "=== System update started ==="
@@ -380,7 +317,7 @@ remove_orphans () {
     LAST_ACTIONS['LAST_ORPHANS']="$(date)"
 }
 
-#=== Display last updates ===#
+#=== Display last actions ===#
 last_actions () {
     echo
     echo '****************'
@@ -404,10 +341,10 @@ main () {
     # Get the last actions dates in LAST_FILE
     read_last
     
-    # Check args for menu mode
+    # Check args presence
     if [ $# = 0 ]; then
-        start_notif
-        menu_mode
+        echo "[ERROR] No argument passed"
+        return 1;
     else
         parse_args "$@"
     fi

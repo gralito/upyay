@@ -9,7 +9,20 @@ System updater for Arch-based systems using yay.
 - **Cache & Journal Cleaning**
 - **AutoBackup**
 - **Configurable**: Easy to configure through a config file
-- **Quick mode**: Provides shortcuts (-short and --long) for each functionnality.
+
+## Changelog
+
+**v3.0.0**
+- short and long arguments version
+
+**v3.1.0**
+- you can display a summary of the updated packages
+- a new option is added to auto-display this summary
+
+**v3.1.1**
+- bugs correction  
+- update PKGBUILD - remove `sudo`  
+- remove --no-confirm from commands
 
 ## Requirements
 
@@ -147,17 +160,6 @@ Detailed information about updates is stored in `~/.logs/upyay/upyay.log`
 - This script runs with sudo privileges to perform system updates
 - Consider the security implications of automatic updates and passwordless sudo
 - This is primarily designed for personal desktop systems with a single user
-
-## Changelog
-
-**v3.0.0**
-- short and long arguments version
-
-**v3.1.0**
-- you can display a summary of the updated packages
-- a new option is added to auto-display this summary
-
-
 
 ---
 

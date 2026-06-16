@@ -9,7 +9,7 @@
 # =========================================
 
 SCRIPT_NAME="upyay.sh"
-VERSION="3.0.0"
+VERSION="3.1.1"
 
 #=== Errors handling ===#
 set -euo pipefail       # (comment for dev mode)
@@ -236,7 +236,7 @@ parse_args (){
 system_update () {
 	log "=== System update started ==="
 	echo "Start system update"
-	if ! yay -Syyu --noconfirm --sudoloop --needed 2>&1 | tee -a "$LOG_FILE" ; then
+	if ! yay -Syyu --sudoloop --needed 2>&1 | tee -a "$LOG_FILE" ; then
 		send_notif $ICON_ERROR "Error during system update!" critical
 		log "=== System update failed ==="
 		exit 1

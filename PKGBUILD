@@ -1,6 +1,6 @@
 # Maintainer: gralito <gralito@protonmail.com>
 pkgname=upyay
-pkgver=3.0.0
+pkgver=3.1.0
 pkgrel=1
 pkgdesc="A yay wrapper written in pure bash."
 arch=('any')
@@ -13,9 +13,15 @@ sha256sums=('SKIP')
 
 package() {
 	cd "$srcdir/$pkgname-$pkgver"
-	
-	sudo install -Dm755 upyay.sh "$pkgdir/usr/local/bin/upyay"
-	sudo install -Dm644 README.md "$pkgdir/usr/share/doc/$pkgname/README.md"
-	sudo install -Dm644 upyay.conf "$pkgdir/home/$USER/.config/$pkgname/upyay.conf"
-	sudo install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+
+	# create .logs directory
+	mkdir -p "$pkgdir/$USER/.logs/upyay/"
+	#create .lock file in this folder
+	touch "$pkgdir/$USER/.logs/upyay/upyay.lock"
+
+	# install files
+	install -Dm755 upyay.sh "$pkgdir/usr/local/bin/upyay"
+	install -Dm644 README.md "$pkgdir/usr/share/doc/$pkgname/README.md"
+	install -Dm644 upyay.conf "$pkgdir/home/$USER/.config/$pkgname/upyay.conf"
+	install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 }

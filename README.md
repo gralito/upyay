@@ -1,4 +1,4 @@
-# upyay v3.0.0
+# upyay v3.1.0
 
 System updater for Arch-based systems using yay.
 
@@ -28,74 +28,82 @@ The following packages are required:
 
 ## Use
 
-You can 'upyay' your system in different ways :  
-1. classic mode  
-just run `upyay` and get guided by the program.  
-
-2. quick mode  
-if you wanna launch only one functionnality, you can use the 'quick mode'.  
-To do so, run your program with a short or a long argument.  
-
 ### Fonctionnalities :  
 
 **1. System update** :  
 performs a complete update of your system  
+
+```bash
+upyay -u
+upyay --update
+```  
+instead of
 ```bash
 yay -Syyu --noconfirm --sudoloop --needed
 ```
 
-*Quick mode* : `upyay -u` or `upyay --update`
 
 **2. Refresh mirrors list** :  
 
 updates the AUR mirrors list. if the `ENDEAVOUROS_OPTION`  
 in the config file is set to `true`, it will also update the  
 EndeavourOS mirrors list.  
-
+```bash
+upyay -m
+upyay --mirrors
+```
+instead of
 ```bash
 sudo reflector --protocol https --verbose --latest 25 --sort rate --save /etc/pacman.d/mirrorlist
   
 eos-rankmirrors --verbose # if the option is enabled.  
 ```
 
-Quick mode : `upyay -m` or `upyay --mirrors`
-
 **3. Clean journal** :  
 
 cleans the systemd journal file and keeps only the last 4 weeks entries.  
-
+```bash
+upyay -j
+upyay --journal
+```
+instead of
 ```bash
 sudo journalctl --vacuum-time=4weeks
 ```
 
-*Quick mode* : `upyay -j` or `upyay --journal`
-
 **4. Clean cache** :  
 
 removes any package in the cache.  
-
+```bash
+upyay -c
+upyay --cache
+```
+instead of
 ```bash
 yay -Scc --noconfirm
 ```
-
-*Quick mode* : `upyay -c` or `upyay --cache`  
 
 **5. Remove orphans** :  
 
 removes any orphan package from the system (at your own risk).  
 please read the packages list before completing the task.  
-
+```bash
+upyay -o
+upyay --orphans
+```
+instead of
 ```bash
 sudo pacman -Qdtq | ifne sudo pacman -Rns
 ```
-
-*Quick mode* : `upyay -o` or `upyay --orphans` 
 
 **6. Last actions** :
 
 displays, for each feature, the date of the last use.
 
-*Quick mode* : `upyay -l` or `upyay --last`
+```bash
+upyay -l
+upyay --last
+```
 
 ## Configuration
 

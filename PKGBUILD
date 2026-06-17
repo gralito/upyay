@@ -9,19 +9,19 @@ license=('MIT')
 depends=('bash' 'yay' 'moreutils' 'dunst')
 provides=('upyay')
 source=("$pkgname-$pkgver.tar.gz::https://github.com/gralito/upyay/archive/v$pkgver.tar.gz")
-sha256sums=('SKIP')
+sha256sums=('6957affe1fd6d387c05ce4f3c6af1358d5ed5f298e633433848eebde6148275d')
 
 package() {
 	cd "$srcdir/$pkgname-$pkgver"
 
 	# create .logs directory
-	mkdir -p "$pkgdir/$USER/.logs/upyay/"
+	mkdir -p "/home/$USER/.logs/upyay/"
 	#create .lock file in this folder
-	touch "$pkgdir/$USER/.logs/upyay/upyay.lock"
+	touch "/home/$USER/.logs/upyay/upyay.lock"
 
 	# install files
-	install -Dm755 upyay.sh "$pkgdir/usr/local/bin/upyay"
-	install -Dm644 README.md "$pkgdir/usr/share/doc/$pkgname/README.md"
-	install -Dm644 upyay.conf "$pkgdir/home/$USER/.config/$pkgname/upyay.conf"
-	install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+	install -Dm755 upyay.sh "/usr/local/bin/upyay"
+	install -Dm644 README.md "/usr/share/doc/$pkgname/README.md"
+	install -Dm644 upyay.conf "/home/$USER/.config/$pkgname/upyay.conf"
+	install -Dm644 LICENSE "/usr/share/licenses/$pkgname/LICENSE"
 }

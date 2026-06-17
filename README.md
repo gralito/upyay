@@ -1,4 +1,4 @@
-# upyay v3.1.0
+# upyay v3.1.2
 
 System updater for Arch-based systems using yay.
 
@@ -12,17 +12,22 @@ System updater for Arch-based systems using yay.
 
 ## Changelog
 
-**v3.0.0**
-- short and long arguments version
-
-**v3.1.0**
-- you can display a summary of the updated packages
-- a new option is added to auto-display this summary
+**v3.1.2**  
+- bump version
+- bugs fix
+- pkgbuild corrections
 
 **v3.1.1**
 - bugs correction  
 - update PKGBUILD - remove `sudo`  
-- remove --no-confirm from commands
+- remove --no-confirm from commands  
+
+**v3.1.0**
+- you can display a summary of the updated packages  
+- a new option is added to auto-display this summary  
+
+**v3.0.0**
+- short and long arguments version  
 
 ## Requirements
 

@@ -21,7 +21,6 @@ LOG_DIR="${XDG_CONFIG_HOME:-$HOME/.logs}/upyay"
 BACKUP_DIR="$LOG_DIR/backup"
 CONFIG_FILE="$CONFIG_DIR/upyay.conf"
 LOG_FILE="$LOG_DIR/upyay.log"
-LOCK_FILE="$LOG_DIR/upyay.lock"
 LAST_FILE="$LOG_DIR/upyay.last"
 
 declare -A LAST_ACTIONS=(
@@ -143,15 +142,6 @@ check_backup () {
 load_config_file () {
     if [[ -f "$CONFIG_FILE" ]]; then
         source "$CONFIG_FILE"
-    fi
-}
-
-#=== Check lock file for another instance ===#
-check_lock_file () {
-    sudo exec 9>"$LOCK_FILE"
-    if ! flock -n 9; then
-        log "Another instance is already running. Exiting."
-        exit 1
     fi
 }
 
@@ -334,7 +324,6 @@ last_actions () {
 #=== Main program ===#
 main () {
     # Prepare the environment
-    check_lock_file
     load_config_file
     reset_log
 

@@ -1,4 +1,4 @@
-# upyay v3.1.4
+# upyay v3.2.0
 
 System updater for Arch-based systems using yay.
 
@@ -12,8 +12,9 @@ System updater for Arch-based systems using yay.
 
 ## Changelog
 
-**v3.1.4**
-- fix permissions issues
+**v3.2.0**
+- bugfixing
+- log issue fixed
 
 ## Requirements
 
@@ -154,6 +155,9 @@ Detailed information about updates is stored in `~/.logs/upyay/upyay.log`
 - This is primarily designed for personal desktop systems with a single user
 
 ## History
+
+**v3.1.4**
+- fix permissions issues
 
 **v3.1.3**
 - various tests

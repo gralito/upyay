@@ -1,6 +1,6 @@
 # Maintainer: gralito <gralito@protonmail.com>
 pkgname=upyay
-pkgver=3.1.4
+pkgver=3.2.0
 pkgrel=4
 pkgdesc="A yay wrapper written in bash."
 arch=('any')
@@ -13,9 +13,6 @@ sha256sums=('SKIP')
 
 package() {
 	cd "$srcdir/$pkgname-$pkgver"
-
-	# create .logs directory
-	mkdir -p "$pkgdir/home/$USER/.logs/upyay/"
 
 	# install files
 	sudo install -Dm755 upyay.sh "$pkgdir/usr/local/bin/upyay"

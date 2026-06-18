@@ -9,7 +9,7 @@ license=('MIT')
 depends=('bash' 'yay' 'moreutils' 'dunst')
 provides=('upyay')
 source=("$pkgname-$pkgver.tar.gz::https://github.com/gralito/upyay/archive/v$pkgver.tar.gz")
-sha256sums=('SKIP')
+sha256sums=('06e37583802810a5bd0c035897ed998eb459d7a85173c9e2a280517ec4d150c9')
 
 package() {
 	cd "$srcdir/$pkgname-$pkgver"
@@ -21,7 +21,7 @@ package() {
 
 	# install files
 	sudo install -Dm755 upyay.sh "/usr/local/bin/upyay"
-	install -Dm644 README.md "/usr/share/doc/$pkgname/README.md"
-	install -Dm644 upyay.conf "/home/$USER/.config/$pkgname/upyay.conf"
-	install -Dm644 LICENSE "/usr/share/licenses/$pkgname/LICENSE"
+	sudo install -Dm644 README.md "/usr/share/doc/$pkgname/README.md"
+	sudo install -Dm644 upyay.conf "/home/$USER/.config/$pkgname/upyay.conf"
+	sudo install -Dm644 LICENSE "/usr/share/licenses/$pkgname/LICENSE"
 }

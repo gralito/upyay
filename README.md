@@ -8,7 +8,7 @@ System updater for Arch-based systems using yay.
 - **Visual Notifications**
 - **Cache & Journal Cleaning**
 - **AutoBackup**
-- **Configurable**: Easy to configure through a config file
+- **Configurable**
 
 ## Changelog
 

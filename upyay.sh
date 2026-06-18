@@ -101,6 +101,15 @@ log () {
 	echo "$(date): $1" >> "$LOG_FILE"
 }
 
+#=== Check log file presence ===#
+check_log () {
+    if [! -f "$LOG_FILE"] {
+        touch "$LOG_FILE"
+        chmod 755 "$LOG_FILE"
+    }
+    reset_log
+}
+
 #=== Reset log file ===#
 reset_log () {
     > "$LOG_FILE"

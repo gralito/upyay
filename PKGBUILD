@@ -14,9 +14,6 @@ sha256sums=('SKIP')
 package() {
 	cd "$srcdir/$pkgname-$pkgver"
 
-	# create .logs directory
-	mkdir -p "$pkgdir/home/$USER/.logs/upyay/"
-
 	# install files
 	sudo install -Dm755 upyay.sh "$pkgdir/usr/local/bin/upyay"
 	sudo install -Dm644 README.md "$pkgdir/usr/share/doc/$pkgname/README.md"

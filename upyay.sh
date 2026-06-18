@@ -148,7 +148,7 @@ load_config_file () {
 
 #=== Check lock file for another instance ===#
 check_lock_file () {
-    exec 9>"$LOCK_FILE"
+    sudo exec 9>"$LOCK_FILE"
     if ! flock -n 9; then
         log "Another instance is already running. Exiting."
         exit 1

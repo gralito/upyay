@@ -2,14 +2,14 @@
 
 # =========================================
 # upyay
-# Version: 3.1.4
+# Version: 3.2.0
 # Author: gralito
 # Github author: https://github.com/gralito
 # Description: a yay wrapper.
 # =========================================
 
 SCRIPT_NAME="upyay.sh"
-VERSION="3.1.4"
+VERSION="3.2.0"
 
 #=== Errors handling ===#
 set -euo pipefail       # (comment for dev mode)
@@ -103,15 +103,16 @@ log () {
 
 #=== Check log file presence ===#
 check_log () {
-    if [! -f "$LOG_FILE"] {
+    if [ ! -f "$LOG_FILE" ]; then
+        mkdir -p "$LOG_DIR"
         touch "$LOG_FILE"
-        chmod 755 "$LOG_FILE"
-    }
-    reset_log
+        chmod 755 $LOG_FILE
+    fi
 }
 
 #=== Reset log file ===#
 reset_log () {
+    check_log
     > "$LOG_FILE"
     log "=== upyay started ==="
 }

@@ -1,6 +1,6 @@
 # Maintainer: gralito <gralito@protonmail.com>
 pkgname=upyay
-pkgver=3.1.4
+pkgver=3.2.0
 pkgrel=4
 pkgdesc="A yay wrapper written in bash."
 arch=('any')

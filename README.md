@@ -1,4 +1,4 @@
-# upyay v3.1.2
+# upyay v3.1.4
 
 System updater for Arch-based systems using yay.
 
@@ -8,26 +8,12 @@ System updater for Arch-based systems using yay.
 - **Visual Notifications**
 - **Cache & Journal Cleaning**
 - **AutoBackup**
-- **Configurable**: Easy to configure through a config file
+- **Configurable**
 
 ## Changelog
 
-**v3.1.2**  
-- bump version
-- bugs fix
-- pkgbuild corrections
-
-**v3.1.1**
-- bugs correction  
-- update PKGBUILD - remove `sudo`  
-- remove --no-confirm from commands  
-
-**v3.1.0**
-- you can display a summary of the updated packages  
-- a new option is added to auto-display this summary  
-
-**v3.0.0**
-- short and long arguments version  
+**v3.1.4**
+- fix permissions issues
 
 ## Requirements
 
@@ -35,6 +21,7 @@ The following packages are required:
 - `bash`            : of course
 - `yay`				: AUR package management
 - `notify-send` 	: desktop notifications
+- `dunst`           : pimp your notifications
 - `moreutils`       : provides `ifne` function, used in the script.
 
 ## Installation / Uninstallation
@@ -166,6 +153,26 @@ Detailed information about updates is stored in `~/.logs/upyay/upyay.log`
 - Consider the security implications of automatic updates and passwordless sudo
 - This is primarily designed for personal desktop systems with a single user
 
+## History
+
+**v3.1.3**
+- various tests
+
+**v3.1.2**  
+- bugs fix
+- pkgbuild corrections
+
+**v3.1.1**
+- bugs correction  
+- update PKGBUILD - remove `sudo`  
+- remove --no-confirm from commands  
+
+**v3.1.0**
+- you can display a summary of the updated packages  
+- a new option is added to auto-display this summary  
+
+**v3.0.0**
+- short and long arguments version  
 ---
 
 2026 by gralito

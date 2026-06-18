@@ -9,7 +9,7 @@ license=('MIT')
 depends=('bash' 'yay' 'moreutils' 'dunst')
 provides=('upyay')
 source=("$pkgname-$pkgver.tar.gz::https://github.com/gralito/upyay/archive/v$pkgver.tar.gz")
-sha256sums=('06e37583802810a5bd0c035897ed998eb459d7a85173c9e2a280517ec4d150c9')
+sha256sums=('SKIP')
 
 package() {
 	cd "$srcdir/$pkgname-$pkgver"

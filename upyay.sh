@@ -40,9 +40,10 @@ NOTIFICATION_TIMEOUT=10000
 ICON_SUCCESS="object-select-symbolic"
 ICON_ERROR="dialog-error-symbolic"
 ICON_INFO="dialog-information-symbolic"
-ENDEAVOUROS_OPTION=false
 AUTO_BACKUP=false
 AUTO_SAVE_UPDATED=false
+VACCUUM_TIME=4weeks
+ENDEAVOUROS_OPTION=false
 
 
 #=== Help display ===#
@@ -61,7 +62,7 @@ show_help () {
 
     OPTIONS:
         -u / --update         : system update
-        -m / --mirrors        : update mirrors list (AUR & EndeavourOS if ENDEAVOUROS_OPTION=true)
+        -m / --mirrors        : update mirrors list (ArchLinux & EndeavourOS if ENDEAVOUROS_OPTION=true)
         -j / --journal        : clean journal
         -c / --cache          : clean cache
         -o / --orphans        : remove orphan packages
@@ -74,7 +75,7 @@ show_help () {
 
     EXIT CODES:
         0 - Success
-        1 - Argument Error
+        1 - Error
 
 EOF
 }
@@ -327,7 +328,7 @@ update_mirrors () {
 clean_journal () {
 	log "=== Journal cleanup started ==="
 	echo "Start journal cleanup"
-	if ! sudo journalctl --vacuum-time=4weeks 2>&1 | tee -a "$LOG_FILE" ; then
+	if ! sudo journalctl --vacuum-time=$VACCUUM_TIME 2>&1 | tee -a "$LOG_FILE" ; then
 		send_notif $ICON_ERROR "Error during journal cleanup!" critical
 		log "=== Journal cleanup failed ==="
 		exit 1

@@ -176,6 +176,11 @@ write_last () {
     done
 }
 
+#=== Show updated packages ===#
+show_updated () {
+    
+}
+
 #=== Arguments parser ===#
 parse_args (){
     if [[ $# -gt 0 ]]; then

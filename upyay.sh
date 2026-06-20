@@ -40,7 +40,7 @@ ICON_ERROR="dialog-error-symbolic"
 ICON_INFO="dialog-information-symbolic"
 ENDEAVOUROS_OPTION=false
 AUTO_BACKUP=false
-AUTO_SHOW_UPDATED=false                     #unused
+AUTO_SAVE_UPDATED=true
 
 
 #=== Help display ===#
@@ -129,7 +129,7 @@ see_log () {
 #=== Backup function ===#
 backup () {
     mkdir -p $BACKUP_DIR
-    filename="$(date +%F)-$(date +%H%M%S)"
+    filename="backup-$(date +%F)-$(date +%H%M%S)"
     cp $LOG_FILE $BACKUP_DIR/${filename}
 }
 
@@ -178,7 +178,43 @@ write_last () {
 
 #=== Show updated packages ===#
 show_updated () {
-    
+    update_file="updated-$(date +%F)-$(date +%H%M%S)"
+    PATTERN='^[[:space:]]?[0-9]+[[:space:]]+.*[[:space:]]+->[[:space:]]+'
+
+    # check LOG_FILE existence
+    if [[ ! -f $LOG_FILE ]]; then
+        echo "[EXIT] No recent log file available !"
+        exit 0
+    fi
+
+    # retrieve updated packages in the LOG_FILE
+    updpkg=$(grep -E "$PATTERN" "$LOG_FILE" || true | 
+            awk '{
+                # Split package name in repo and package
+                split($2, package, "/")
+                # Extract package name, old version, new version
+                # Remove leading/trailing whitespace from versions
+                gsub(/^[ \t]+/, "", $3)
+                gsub(/[ \t]+$/, "", $5)
+                # Format output
+                print "=> " package[2] ""
+                print "\t repo : " package[1]
+                print "\t version : " $3 " → " $5
+            }')
+    # # exit if none has been found
+    if [[ -z $updpkg ]]; then
+        echo "[EXIT] No updated packages"
+        exit 0
+    fi
+
+    # display found ones
+    echo "=== Updated Packages ==="
+    echo
+    echo "$updpkg"
+    # and store them in a file if the option is enabled
+    if [[ $AUTO_SAVE_UPDATED ]]; then
+        echo "$updpkg" > $update_file
+    fi
 }
 
 #=== Arguments parser ===#
@@ -228,6 +264,9 @@ parse_args (){
                 exit 0;;
             -v | --version)
                 show_version
+                exit 0;;
+            -s)
+                show_updated
                 exit 0;;
             *)
                 echo -e "[ERROR] Unknown argument : $1"
@@ -339,7 +378,12 @@ last_actions () {
 #=== Main program ===#
 main () {
     # Prepare the environment
-    load_config_file
+    # load_config_file
+    case $1 in
+        -s)
+            show_updated
+            exit 0;;
+    esac
     reset_log
 
     # Get the last actions dates in LAST_FILE

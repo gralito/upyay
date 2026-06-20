@@ -1,20 +1,20 @@
-# upyay v3.2.0
+# upyay v4.0.0
 
 System updater for Arch-based systems using yay.
 
 ## Features
 
-- **On-demand updates & Mirror's list refreshing**
+- **On-demand Updates & Mirror's List Refreshing**
 - **Visual Notifications**
 - **Cache & Journal Cleaning**
 - **AutoBackup**
+- **Display & Save Updated Packages List**
 - **Configurable**
 
 ## Changelog
 
-**v3.2.0**
-- bugfixing
-- log issue fixed
+**v4.0.0**
+- updated packages list
 
 ## Requirements
 
@@ -47,6 +47,7 @@ instead of
 ```bash
 yay -Syyu --noconfirm --sudoloop --needed
 ```
+
 
 
 **2. Refresh mirrors list** :  
@@ -144,6 +145,11 @@ also wanna refresh EOS mirrors list.
 If this option is set to true, you won't be asked if you wanna  
 backup your log file, it will be done automatically.
 
+### Auto save updated
+
+This option enables the auto save of the updated packages list in a file.  
+If disabled, you will be prompted.
+
 ## Logs
 
 Detailed information about updates is stored in `~/.logs/upyay/upyay.log`
@@ -155,6 +161,10 @@ Detailed information about updates is stored in `~/.logs/upyay/upyay.log`
 - This is primarily designed for personal desktop systems with a single user
 
 ## History
+
+**v3.2.0**
+- bugfixing
+- log issue fixed
 
 **v3.1.4**
 - fix permissions issues

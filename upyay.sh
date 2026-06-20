@@ -2,14 +2,14 @@
 
 # =========================================
 # upyay
-# Version: 3.2.0
+# Version: 4.0.0
 # Author: gralito
 # Github author: https://github.com/gralito
 # Description: a yay wrapper.
 # =========================================
 
 SCRIPT_NAME="upyay.sh"
-VERSION="3.2.0"
+VERSION="4.0.0"
 
 #=== Errors handling ===#
 set -euo pipefail       # (comment for dev mode)
@@ -22,6 +22,8 @@ BACKUP_DIR="$LOG_DIR/backup"
 CONFIG_FILE="$CONFIG_DIR/upyay.conf"
 LOG_FILE="$LOG_DIR/upyay.log"
 LAST_FILE="$LOG_DIR/upyay.last"
+UPDATE_FILE="$BACKUP_DIR/updated-$(date +%F)-$(date +%H%M%S)"
+PATTERN='^[[:space:]]?[0-9]+[[:space:]]+.*[[:space:]]+->[[:space:]]+'
 
 declare -A LAST_ACTIONS=(
     ["LAST_UPDATE"]=""
@@ -40,7 +42,7 @@ ICON_ERROR="dialog-error-symbolic"
 ICON_INFO="dialog-information-symbolic"
 ENDEAVOUROS_OPTION=false
 AUTO_BACKUP=false
-AUTO_SHOW_UPDATED=false                     #unused
+AUTO_SAVE_UPDATED=false
 
 
 #=== Help display ===#
@@ -129,7 +131,7 @@ see_log () {
 #=== Backup function ===#
 backup () {
     mkdir -p $BACKUP_DIR
-    filename="$(date +%F)-$(date +%H%M%S)"
+    filename="backup-$(date +%F)-$(date +%H%M%S)"
     cp $LOG_FILE $BACKUP_DIR/${filename}
 }
 
@@ -174,6 +176,48 @@ write_last () {
     do
         echo "${element}='${LAST_ACTIONS[${element}]}'" >> "$LAST_FILE"
     done
+}
+
+#=== Show updated packages ===#
+show_updated () {
+    # check LOG_FILE existence
+    if [[ ! -f $LOG_FILE ]]; then
+        echo "[EXIT] No recent log file available !"
+        exit 0
+    fi
+
+    # retrieve updated packages in the LOG_FILE
+    updpkg=$((grep -E "$PATTERN" "$LOG_FILE" || true) | 
+            awk '{
+                # Split package name in repo and package
+                split($2, package, "/")
+                # Extract package name, old version, new version
+                # Remove leading/trailing whitespace from versions
+                gsub(/^[ \t]+/, "", $3)
+                gsub(/[ \t]+$/, "", $5)
+                # Format output
+                print "-- " package[2] ""
+                print "\t repo : " package[1]
+                print "\t version : " $3 " => " $5
+            }')
+    # exit if none has been found
+    if [[ -z $updpkg ]]; then
+        echo "[EXIT] No updated packages"
+        exit 0
+    fi
+
+    # display found ones
+    echo "=== Updated Packages ==="
+    echo
+    echo "$updpkg"
+    echo
+    # and store them in a file if the option is enabled
+    if [[ $AUTO_SAVE_UPDATED = false ]]; then
+        read -p "Do you want to save a backup copy ? [y/N]" backup_copy
+    fi
+    if [[ $AUTO_SAVE_UPDATED = true || "$backup_copy" =~ ^[Yy]$ ]]; then
+        echo "$updpkg" > $UPDATE_FILE
+    fi
 }
 
 #=== Arguments parser ===#
@@ -224,6 +268,9 @@ parse_args (){
             -v | --version)
                 show_version
                 exit 0;;
+            -s)
+                show_updated
+                exit 0;;
             *)
                 echo -e "[ERROR] Unknown argument : $1"
                 show_help
@@ -244,6 +291,7 @@ system_update () {
 	send_notif $ICON_SUCCESS "System update successful" normal
 	log "=== System update succeeded ==="
     LAST_ACTIONS['LAST_UPDATE']="$(date)"
+    show_updated
 }
 
 #=== Mirrors list update ===#

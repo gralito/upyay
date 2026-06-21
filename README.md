@@ -14,7 +14,8 @@ System updater for Arch-based systems using yay.
 ## Changelog
 
 **v4.0.0**
-- updated packages list
+- display the last updated packages list  
+- configurable systemd journal cleaning vaccuum time
 
 ## Requirements
 

@@ -36,6 +36,18 @@ declare -A LAST_ACTIONS=(
 #=== Default configuration ===#
 # active if the config file does not exist
 NOTHING_TO_DO_STRING="there is nothing to do"
+STARTUP_STRING="Let's go"
+UPDATE_ERROR_STRING="Error during system update!"
+UPDATE_SUCCESS_STRING="System update successful"
+AUR_MIRRORS_ERROR_STRING="Error during AUR mirrors list update !"
+EOS_MIRRORS_ERROR_STRING="Error during EOS mirrors list update !"
+LISTS_SUCCESS_STRING="Lists update successful !"
+JOURNAL_ERROR_STRING="Error during journal cleanup !"
+JOURNAL_SUCCESS_STRING="Journal cleanup successful"
+CACHE_ERROR_STRING="Error during cache cleanup !"
+CACHE_SUCCESS_STRING="Cache cleanup successful"
+NO_ORPHANS_STRING="No orphan packages !"
+ORPHANS_SUCCESS_STRING="Orphans remove successful !"
 NOTIFICATION_TIMEOUT=10000
 ICON_SUCCESS="object-select-symbolic"
 ICON_ERROR="dialog-error-symbolic"
@@ -96,7 +108,7 @@ send_notif () {
 #=== Start notification ===#
 start_notif () {
     ID=$(notify-send --print-id -t "$NOTIFICATION_TIMEOUT" -u normal \
-        -a "upyay" -i $ICON_INFO "UpYaY" "... starting upyay ...")
+        -a "upyay" -i $ICON_INFO "UpYaY" "$STARTUP_STRING")
 }
 
 #=== Write in log file ===#
@@ -285,11 +297,11 @@ system_update () {
 	log "=== System update started ==="
 	echo "Start system update"
 	if ! yay -Syyu --sudoloop --needed 2>&1 | tee -a "$LOG_FILE" ; then
-		send_notif $ICON_ERROR "Error during system update!" critical
+		send_notif $ICON_ERROR "$UPDATE_ERROR_STRING" critical
 		log "=== System update failed ==="
 		exit 1
 	fi
-	send_notif $ICON_SUCCESS "System update successful" normal
+	send_notif $ICON_SUCCESS "$UPDATE_SUCCESS_STRING" normal
 	log "=== System update succeeded ==="
     LAST_ACTIONS['LAST_UPDATE']="$(date)"
     show_updated
@@ -300,7 +312,7 @@ update_mirrors () {
 	log "=== Refresh AUR mirrors list started ==="
 	echo "Refresh AUR mirrors list"
 	if ! sudo reflector --protocol https --verbose --latest 25 --sort rate --save /etc/pacman.d/mirrorlist ; then
-		send_notif $ICON_ERROR "Error during AUR mirrors update!" critical
+		send_notif $ICON_ERROR "$AUR_MIRRORS_ERROR_STRING" critical
 		log "=== Refresh AUR mirrors list failed ==="
 		exit 1
 	fi
@@ -308,12 +320,12 @@ update_mirrors () {
 		log "=== Refresh EOS mirrors list started ==="
 		echo "Refresh EOS mirrors list"
 		if ! eos-rankmirrors --verbose ; then
-			send_notif $ICON_ERROR "Error during EOS mirrors update!" critical
+			send_notif $ICON_ERROR "$EOS_MIRRORS_ERROR_STRING" critical
 			log "=== Refresh EOS mirrors list failed ==="
 			exit 1
 		fi
 	fi
-	send_notif "$ICON_SUCCESS" "Lists update successful" normal
+	send_notif "$ICON_SUCCESS" "$LISTS_SUCCESS_STRING" normal
 	log "=== Lists update succeeded ==="
     LAST_ACTIONS['LAST_MIRRORS']="$(date)"
     echo
@@ -329,11 +341,11 @@ clean_journal () {
 	log "=== Journal cleanup started ==="
 	echo "Start journal cleanup"
 	if ! sudo journalctl --vacuum-time=$VACCUUM_TIME 2>&1 | tee -a "$LOG_FILE" ; then
-		send_notif $ICON_ERROR "Error during journal cleanup!" critical
+		send_notif $ICON_ERROR "$JOURNAL_ERROR_STRING" critical
 		log "=== Journal cleanup failed ==="
 		exit 1
 	fi
-	send_notif "$ICON_SUCCESS" "Journal cleanup successful" normal
+	send_notif "$ICON_SUCCESS" "$JOURNAL_SUCCESS_STRING" normal
 	log "=== Journal cleanup succeeded ==="
     LAST_ACTIONS['LAST_JOURNAL']="$(date)"
 }
@@ -343,11 +355,11 @@ clean_cache () {
 	log "=== Cache cleanup started ==="
 	echo "Start cache cleanup"
 	if ! yay -Scc --noconfirm 2>&1 | tee -a "$LOG_FILE" ; then
-		send_notif "$ICON_ERROR" "Error during cache cleanup!" critical
+		send_notif "$ICON_ERROR" "$CACHE_ERROR_STRING" critical
 		log "=== Cache cleanup failed ==="
 		exit 1
 	fi
-	send_notif "$ICON_SUCCESS" "Cache cleanup successful" normal
+	send_notif "$ICON_SUCCESS" "$CACHE_SUCCESS_STRING" normal
 	log "=== Cache cleanup succeeded ==="
     LAST_ACTIONS['LAST_CACHE']="$(date)"
 }
@@ -357,10 +369,10 @@ remove_orphans () {
 	log "=== Orphans remove started ==="
 	echo "Start orphans remove"
 	if ! sudo pacman -Qdtq | ifne sudo pacman -Rns - 2>&1 | tee -a "$LOG_FILE" ; then
-		send_notif "$ICON_INFO" "No orphan packages!" normal
+		send_notif "$ICON_INFO" "$NO_ORPHANS_STRING" normal
 		log "=== No orphan packages ==="
 	else
-		send_notif "$ICON_INFO" "Orphans remove successful" normal
+		send_notif "$ICON_INFO" "$ORPHANS_SUCCESS_STRING" normal
 		log "=== Orphans remove succeeded ==="
 	fi
     LAST_ACTIONS['LAST_ORPHANS']="$(date)"
@@ -383,7 +395,7 @@ last_actions () {
 #=== Main program ===#
 main () {
     # Prepare the environment
-    load_config_file
+    # load_config_file
     reset_log
 
     # Get the last actions dates in LAST_FILE

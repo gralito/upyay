@@ -24,10 +24,10 @@
 - [x] Cache cleanup successful
 - [x] No orphan packages!
 - [x] Orphans remove successful
- 
- - [ ] update upyay.sh
+- [x] update upyay.sh
+- [x] update README.md
+- [ ] tests
 
- 
 [ ] list dependencies  
 [ ] PKGBUILD  
 [ ] test  

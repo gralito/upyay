@@ -12,18 +12,21 @@
 ## Next Actions
 
 [ ] update .conf - languages :  
-- [ ] ... starting upyay ...
-- [ ] Error during system update!
-- [ ] System update successful
-- [ ] Error during AUR mirrors update!
-- [ ] Error during EOS mirrors update!
-- [ ] Lists update successful
-- [ ] Error during journal cleanup!
-- [ ] Journal cleanup successful
-- [ ] Error during cache cleanup!
-- [ ] Cache cleanup successful
-- [ ] No orphan packages!
-- [ ] Orphans remove successful
+- [x] ... starting upyay ...
+- [x] Error during system update!
+- [x] System update successful
+- [x] Error during AUR mirrors update!
+- [x] Error during EOS mirrors update!
+- [x] Lists update successful
+- [x] Error during journal cleanup!
+- [x] Journal cleanup successful
+- [x] Error during cache cleanup!
+- [x] Cache cleanup successful
+- [x] No orphan packages!
+- [x] Orphans remove successful
+ 
+ - [ ] update upyay.sh
+
  
 [ ] list dependencies  
 [ ] PKGBUILD  

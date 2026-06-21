@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# =========================================
-# upyay
-# Version: 4.0.0
-# Author: gralito
-# Github author: https://github.com/gralito
-# Description: a yay wrapper.
-# =========================================
+# ========================================= #
+# upyay                                     #
+# Version: 4.0.0                            #
+# Author: gralito                           #
+# Github author: https://github.com/gralito #
+# Description: a yay wrapper.               #
+# ========================================= #
 
 SCRIPT_NAME="upyay.sh"
 VERSION="4.0.0"

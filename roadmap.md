@@ -11,7 +11,20 @@
 
 ## Next Actions
 
-[ ] update .conf - languages  
+[ ] update .conf - languages :  
+- [ ] ... starting upyay ...
+- [ ] Error during system update!
+- [ ] System update successful
+- [ ] Error during AUR mirrors update!
+- [ ] Error during EOS mirrors update!
+- [ ] Lists update successful
+- [ ] Error during journal cleanup!
+- [ ] Journal cleanup successful
+- [ ] Error during cache cleanup!
+- [ ] Cache cleanup successful
+- [ ] No orphan packages!
+- [ ] Orphans remove successful
+ 
 [ ] list dependencies  
 [ ] PKGBUILD  
 [ ] test  

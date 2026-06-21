@@ -46,7 +46,7 @@ upyay --update
 ```  
 instead of
 ```bash
-yay -Syyu --noconfirm --sudoloop --needed
+yay -Syyu --sudoloop --needed
 ```
 
 

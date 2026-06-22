@@ -126,9 +126,8 @@ where you can customize:
 
 ### Language configuration
 
-**Important**: If yay's output is not in English, you need to change  
-the `NOTHING_TO_DO_STRING` in the configuration file to match  
-your language's equivalent for "there is nothing to do".
+Notifications language can be changed, sentence by sentence.  
+Set your own messages !
 
 ### Notifications configuration
 

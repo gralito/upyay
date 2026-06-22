@@ -11,10 +11,9 @@
 
 ## Next Actions
 
-[ ] update .conf - languages  
+[x] update .conf - languages :  
 [ ] list dependencies  
 [ ] PKGBUILD  
-[ ] test  
 
 
 ## Bugs

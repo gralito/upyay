@@ -36,7 +36,7 @@ declare -A LAST_ACTIONS=(
 #=== Default configuration ===#
 # active if the config file does not exist
 NOTHING_TO_DO_STRING="there is nothing to do"
-STARTUP_STRING="Let's go"
+STARTUP_STRING="...starting upyay..."
 UPDATE_ERROR_STRING="Error during system update!"
 UPDATE_SUCCESS_STRING="System update successful"
 AUR_MIRRORS_ERROR_STRING="Error during AUR mirrors list update !"
@@ -395,7 +395,7 @@ last_actions () {
 #=== Main program ===#
 main () {
     # Prepare the environment
-    # load_config_file
+    load_config_file
     reset_log
 
     # Get the last actions dates in LAST_FILE

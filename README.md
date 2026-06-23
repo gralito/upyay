@@ -1,4 +1,4 @@
-# upyay v4.0.0
+# upyay v4.0.1
 
 System updater for Arch-based systems using yay.
 
@@ -13,7 +13,7 @@ System updater for Arch-based systems using yay.
 
 ## Changelog
 
-**v4.0.0**
+**v4.0.1**
 - highly configurable notifications messages  
 - display the last updated packages list  
 - configurable systemd journal cleaning vaccuum time
@@ -21,11 +21,10 @@ System updater for Arch-based systems using yay.
 ## Requirements
 
 The following packages are required:
-- `bash`            : of course
 - `yay`				: AUR package management
-- `notify-send` 	: desktop notifications
 - `dunst`           : pimp your notifications
 - `moreutils`       : provides `ifne` function, used in the script.
+- `nvim`            : to display logs
 
 ## Installation / Uninstallation
 

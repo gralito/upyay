@@ -2,14 +2,14 @@
 
 # ========================================= #
 # upyay                                     #
-# Version: 4.0.0                            #
+# Version: 4.0.1                            #
 # Author: gralito                           #
 # Github author: https://github.com/gralito #
 # Description: a yay wrapper.               #
 # ========================================= #
 
 SCRIPT_NAME="upyay.sh"
-VERSION="4.0.0"
+VERSION="4.0.1"
 
 #=== Errors handling ===#
 set -euo pipefail       # (comment for dev mode)

@@ -1,12 +1,12 @@
 # Maintainer: gralito <gralito@protonmail.com>
 pkgname=upyay
-pkgver=4.0.0
+pkgver=4.0.1
 pkgrel=1
 pkgdesc="A yay wrapper written in bash."
 arch=('x86_64')
 url="https://github.com/gralito/upyay"
 license=('MIT')
-depends=('yay' 'moreutils' 'dunst')
+depends=('yay' 'moreutils' 'dunst' 'nvim')
 provides=('upyay')
 source=("$pkgname-$pkgver.tar.gz::https://github.com/gralito/upyay/archive/v$pkgver.tar.gz")
 sha256sums=('SKIP')
